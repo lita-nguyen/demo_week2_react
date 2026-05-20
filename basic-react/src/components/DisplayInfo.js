@@ -3,9 +3,29 @@ import "./DisplayInfo.scss";
 import logo from "./../logo.svg";
 
 class DisplayInfo extends React.Component {
-  state = {
-    isShowListUser: true,
-  };
+  constructor(props) {
+    console.log("Call constructor: 1");
+    super(props);
+    this.state = {
+      isShowListUser: true,
+    };
+  }
+
+  componentDidMount() {
+    console.log("Call me component did mount");
+    setTimeout(() => {
+      document.title = "Lita Nguyen";
+    }, 2000);
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("Call me component did update", this.props, prevProps);
+    if (this.props.listUsers !== prevProps.listUsers) {
+      if (this.props.listUsers.length === 5) {
+        alert("You got 5 users");
+      }
+    }
+  }
 
   handShowHide = () => {
     this.setState({
@@ -14,6 +34,7 @@ class DisplayInfo extends React.Component {
   };
 
   render() {
+    console.log("Call me render");
     const { listUsers } = this.props;
     console.log(listUsers);
     return (
