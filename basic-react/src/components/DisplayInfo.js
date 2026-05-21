@@ -1,38 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./DisplayInfo.scss";
 import logo from "./../logo.svg";
-
-// class DisplayInfo extends React.Component {
-//   render() {
-//     console.log("Call me render");
-//     const { listUsers } = this.props;
-//     console.log(listUsers);
-//     return (
-//       <div className="display-info-container">
-//         {true && (
-//           <>
-//             {listUsers.map((user) => {
-//               return (
-//                 <div key={user.id} className={+user.age > 18 ? "green" : "red"}>
-//                   <div>My name is {user.name}</div>
-//                   <div>My age is {user.age}</div>
-//                   <div>
-//                     <button
-//                       onClick={() => this.props.handleDeleteUser(user.id)}
-//                     >
-//                       Delete
-//                     </button>
-//                   </div>
-//                   <hr />
-//                 </div>
-//               );
-//             })}
-//           </>
-//         )}
-//       </div>
-//     );
-//   }
-// }
 
 const DisplayInfo = (props) => {
   const { listUsers } = props;
@@ -42,6 +10,13 @@ const DisplayInfo = (props) => {
   const handleShowHideListUser = () => {
     setShowHideListUser(!isShowHideListUser);
   };
+
+  useEffect(() => {
+    if (listUsers.length === 0) {
+      alert("You deleted all the users");
+    }
+    console.log("Call me useEffect");
+  }, [listUsers]);
 
   return (
     <div className="display-info-container">
