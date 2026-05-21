@@ -22,7 +22,8 @@ body {
     .navbar-nav {
       .nav-link {
         &.active {
-          color: blue;
+          color: rgb(64, 132, 242);
+          font-weight: 600;
         }
       }
     }
