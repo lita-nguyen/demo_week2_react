@@ -1,6 +1,5 @@
 import "./App.scss";
 import Header from "./components/Header/Header";
-import { Link } from "react-router-dom";
 import {
   Form,
   Outlet,
