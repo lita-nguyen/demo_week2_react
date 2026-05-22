@@ -51,7 +51,7 @@ const SideBar = ({ collapsed }) => {
             justifyContent: collapsed ? "center" : "flex-start",
           }}
         >
-          <TbPigFilled size={40} color="#f9711c" />
+          <TbPigFilled size={40} color="#f73f02" />
           {!collapsed && (
             <span
               style={{
