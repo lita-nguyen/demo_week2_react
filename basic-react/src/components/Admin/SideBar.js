@@ -1,10 +1,7 @@
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import {
-  FaTachometerAlt,
-  FaGem,
-  FaGithub,
-  FaRegLaughWink,
-} from "react-icons/fa";
+import { FaTachometerAlt, FaGem, FaGithub } from "react-icons/fa";
+import { TbPigFilled } from "react-icons/tb";
+import { Link } from "react-router-dom";
 
 import sidebarBg from "../../assets/bg2.png";
 
@@ -25,12 +22,12 @@ const SideBar = ({ collapsed }) => {
         style={{
           position: "absolute",
           inset: 0,
-          background: "rgba(255, 255, 255, 0.7)",
+          background: "rgba(255,255,255,0.8)",
           zIndex: 0,
         }}
-      ></div>
+      />
 
-      {/* CONTENT WRAPPER */}
+      {/* CONTENT */}
       <div
         style={{
           position: "relative",
@@ -43,14 +40,29 @@ const SideBar = ({ collapsed }) => {
         {/* HEADER */}
         <div
           style={{
-            padding: "24px",
-            fontWeight: "bold",
-            fontSize: 20,
+            padding: "20px",
+            fontWeight: 600,
+            fontSize: 18,
             color: "#222",
             borderBottom: "1px solid rgba(0,0,0,0.1)",
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            justifyContent: collapsed ? "center" : "flex-start",
           }}
         >
-          Lita Nguyen
+          <TbPigFilled size={40} color="#f9711c" />
+          {!collapsed && (
+            <span
+              style={{
+                opacity: collapsed ? 0 : 1,
+                transition: "opacity 0.2s ease",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Lita Nguyen
+            </span>
+          )}
         </div>
 
         {/* MENU */}
@@ -58,33 +70,34 @@ const SideBar = ({ collapsed }) => {
           <Menu
             menuItemStyles={{
               button: {
-                padding: "12px 20px",
-                borderRadius: "8px",
+                padding: "12px 16px",
+                borderRadius: "10px",
                 color: "#333",
+                display: "flex",
+                justifyContent: collapsed ? "center" : "flex-start",
                 "&:hover": {
-                  backgroundColor: "rgba(229, 104, 26, 0.08)",
-                  color: "#000",
+                  backgroundColor: "rgba(249,113,28,0.1)",
                 },
               },
             }}
           >
             <MenuItem
-              icon={<FaTachometerAlt />}
-              suffix={<span className="badge red">New</span>}
+              icon={<FaTachometerAlt size={22} />}
+              component={<Link to="/admins" />}
             >
-              Dashboard
+              {!collapsed && "Dashboard"}
             </MenuItem>
 
-            <MenuItem icon={<FaGem />}>Components</MenuItem>
-
             <SubMenu
-              label="More"
-              icon={<FaRegLaughWink />}
-              suffix={<span className="badge yellow">3</span>}
+              label={!collapsed && "Management"}
+              icon={<FaGem size={22} />}
+              suffix={!collapsed && <span className="badge yellow">3</span>}
             >
-              <MenuItem>Item 1</MenuItem>
-              <MenuItem>Item 2</MenuItem>
-              <MenuItem>Item 3</MenuItem>
+              <MenuItem component={<Link to="/admins/manage-users" />}>
+                {!collapsed && "User"}
+              </MenuItem>
+              <MenuItem>Quiz</MenuItem>
+              <MenuItem>Question</MenuItem>
             </SubMenu>
           </Menu>
         </div>
@@ -92,7 +105,7 @@ const SideBar = ({ collapsed }) => {
         {/* FOOTER */}
         <div
           style={{
-            padding: "20px",
+            padding: "16px",
             borderTop: "1px solid rgba(0,0,0,0.1)",
           }}
         >
@@ -110,8 +123,18 @@ const SideBar = ({ collapsed }) => {
               fontWeight: 500,
             }}
           >
-            <FaGithub />
-            viewSource
+            <FaGithub size={22} />
+            {!collapsed && (
+              <span
+                style={{
+                  opacity: collapsed ? 0 : 1,
+                  transition: "opacity 0.2s ease",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                Lita Nguyen
+              </span>
+            )}
           </a>
         </div>
       </div>
