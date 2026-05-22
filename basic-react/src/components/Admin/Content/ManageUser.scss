@@ -1,3 +1,33 @@
+.manage-user-container {
+  padding: 10px;
+  .title {
+    font-weight: 600;
+    font-size: 20px;
+  }
+  .users-content {
+    .btn-add-new {
+      button {
+        margin: 15px 0;
+        border-radius: 5px;
+        padding: 0 30px;
+        padding-right: 40px;
+        background: #f9711c;
+        color: white;
+        border: 1px solid #f9711c;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        &:hover {
+          background: #f73f02;
+          border: 1px solid #f73f02;
+        }
+      }
+    }
+  }
+}
+
 .model-add-user {
   .img-preview {
     border: 1px dashed #ccc;

@@ -3,8 +3,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { IoAddCircle } from "react-icons/io5";
 
-const ModalCreateUser = () => {
-  const [show, setShow] = useState(false);
+const ModalCreateUser = (props) => {
+  const { show, setShow } = props;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -27,9 +27,9 @@ const ModalCreateUser = () => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      {/* <Button variant="primary" onClick={handleShow}>
         Launch demo modal
-      </Button>
+      </Button> */}
 
       <Modal
         className="model-add-user"
@@ -79,6 +79,7 @@ const ModalCreateUser = () => {
               <select
                 className="form-select"
                 onChange={(event) => setRole(event.target.value)}
+                value={role}
               >
                 <option value="USER">User</option>
                 <option value="ADMIN">Admin</option>
