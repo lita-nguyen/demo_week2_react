@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { IoAddCircle } from "react-icons/io5";
 import axios from "axios";
+import { ToastContainer, toast, Bounce } from "react-toastify";
 
 const ModalCreateUser = (props) => {
   const { show, setShow } = props;
@@ -33,15 +34,27 @@ const ModalCreateUser = (props) => {
     }
   };
 
-  const handSubmitCreateUser = async () => {
-    // let data = {
-    //   email: email,
-    //   password: password,
-    //   username: username,
-    //   role: role,
-    //   userImage: image,
-    // };
+  const validateEmail = (email) => {
+    const regex =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()[\]\\.,;:\s@"]+\.)+[^<>()[\]\\.,;:\s@"]{2,})$/;
 
+    return regex.test(String(email).toLowerCase());
+  };
+
+  const handSubmitCreateUser = async () => {
+    //validate
+    const isValidEmail = validateEmail(email);
+    if (!isValidEmail) {
+      toast.error("Invalid email!");
+      return;
+    }
+
+    if (!password) {
+      toast.error("Invalid password!");
+      return;
+    }
+
+    //submit data
     const data = new FormData();
     data.append("email", email);
     data.append("password", password);
@@ -53,7 +66,16 @@ const ModalCreateUser = (props) => {
       "http://localhost:8081/api/v1/participant",
       data,
     );
-    console.log("Check res:", res);
+    console.log("Check res:", res.data);
+
+    if (res.data && res.data.EC === 0) {
+      toast.success("Add user successful!");
+      handleClose();
+    }
+
+    if (res.data && res.data.EC !== 0) {
+      toast.error(res.data.EM);
+    }
   };
 
   return (
